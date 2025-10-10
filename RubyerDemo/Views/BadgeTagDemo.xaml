@@ -23,8 +23,7 @@
                             </rubyer:Badge>
                             <rubyer:Badge Margin="10"
                                           BadgeBrush="{DynamicResource Dark}"
-                                          BadgeFontSize="20"
-                                          Text="20">
+                                          BadgeFontSize="20">
                                 <Button Style="{DynamicResource OutlineButton}" Width="60">
                                     回复
                                 </Button>
@@ -42,6 +41,14 @@
                             <rubyer:Badge Margin="10"
                                           BadgeBrush="{StaticResource Success}"
                                           BadgeSize="30">
+                                <rubyer:Badge.BadgeContent>
+                                    <Button Style="{StaticResource TextButton}"
+                                            Padding="0"
+                                            rubyer:ButtonHelper.IconType="Hand"
+                                            rubyer:ButtonHelper.Shape="Round"
+                                            Click="Button_Click"
+                                            Foreground="{StaticResource WhiteForeground}" />
+                                </rubyer:Badge.BadgeContent>
                                 <Button Style="{DynamicResource OutlineButton}" Width="100">
                                     更新版本
                                 </Button>

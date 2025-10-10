@@ -22,7 +22,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Badge}">
-                    <Grid x:Name="root">
+                    <rubyer:OverlayPanel x:Name="root">
                         <rubyer:AdornerContainer>
                             <rubyer:AdornerContainer.Offset>
                                 <MultiBinding Converter="{StaticResource BadgeOffsetConverter}">
@@ -41,27 +41,38 @@
                                 <Border.RenderTransform>
                                     <ScaleTransform />
                                 </Border.RenderTransform>
-                                <TextBlock x:Name="text"
-                                           Margin="5 2"
-                                           HorizontalAlignment="Center"
-                                           FontSize="{TemplateBinding BadgeFontSize}"
-                                           Foreground="{TemplateBinding Foreground}"
-                                           Text="{TemplateBinding Text}" />
+                                <rubyer:OverlayPanel Margin="5 2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock x:Name="text"
+                                               FontSize="{TemplateBinding BadgeFontSize}"
+                                               Foreground="{TemplateBinding Foreground}"
+                                               Text="{TemplateBinding Text}"
+                                               Visibility="Collapsed" />
+                                    <ContentPresenter x:Name="badgeContent" ContentSource="BadgeContent" />
+                                </rubyer:OverlayPanel>
                             </Border>
                         </rubyer:AdornerContainer>
 
                         <ContentPresenter Focusable="False"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                    </Grid>
+                    </rubyer:OverlayPanel>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                            <Setter TargetName="text" Property="Visibility" Value="Collapsed" />
-                            <Setter Property="BadgeSize" Value="10" />
-                        </DataTrigger>
                         <Trigger Property="IsHidden" Value="True">
                             <Setter TargetName="border" Property="Visibility" Value="Collapsed" />
                         </Trigger>
+                        <Trigger Property="BadgeContent" Value="{x:Null}">
+                            <Setter TargetName="text" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="badgeContent" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True"/>
+                                <Condition Binding="{Binding BadgeContent, RelativeSource={RelativeSource Self}}" Value="{x:Null}"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="text" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="badgeContent" Property="Visibility" Value="Collapsed" />
+                            <Setter Property="BadgeSize" Value="10" />
+                        </MultiDataTrigger>
                         <EventTrigger RoutedEvent="TextChanged">
                             <BeginStoryboard>
                                 <BeginStoryboard.Storyboard>

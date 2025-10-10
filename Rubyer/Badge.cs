@@ -1,4 +1,5 @@
 ﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -45,6 +46,21 @@ namespace Rubyer
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
+        }
+
+        /// <summary>
+        /// 显示内容（优先于文本显示）
+        /// </summary>
+        public static readonly DependencyProperty BadgeContentProperty =
+            DependencyProperty.Register("BadgeContent", typeof(object), typeof(Badge), new PropertyMetadata(null, OnBadgeContentChanged));
+
+        /// <summary>
+        /// 显示内容（优先于文本显示）
+        /// </summary>
+        public object BadgeContent
+        {
+            get { return (object)GetValue(BadgeContentProperty); }
+            set { SetValue(BadgeContentProperty, value); }
         }
 
         /// <summary>
@@ -103,12 +119,27 @@ namespace Rubyer
             EventManager.RegisterRoutedEvent("TextChanged", RoutingStrategy.Direct, typeof(RoutedEventArgs), typeof(Badge));
 
         /// <summary>
-        /// 文本改变事件
-        /// </summary>处理
+        /// 文本改变事件处理
+        /// </summary>
         public event RoutedEventHandler TextChanged
         {
             add { AddHandler(TextChangedEvent, value); }
             remove { RemoveHandler(TextChangedEvent, value); }
+        }
+
+        /// <summary>
+        /// 内容改变事件
+        /// </summary>
+        public static readonly RoutedEvent BadgeContentChangedEvent =
+            EventManager.RegisterRoutedEvent("BadgeContentChanged", RoutingStrategy.Direct, typeof(RoutedEventArgs), typeof(Badge));
+
+        /// <summary>
+        /// 内容改变事件处理
+        /// </summary>
+        public event RoutedEventHandler BadgeContentChanged
+        {
+            add { AddHandler(BadgeContentChangedEvent, value); }
+            remove { RemoveHandler(BadgeContentChangedEvent, value); }
         }
 
         #endregion 事件
@@ -125,6 +156,19 @@ namespace Rubyer
             Badge badge = d as Badge;
             RoutedEventArgs args = new RoutedEventArgs();
             args.RoutedEvent = TextChangedEvent;
+            badge.RaiseEvent(args);
+        }
+
+        private static void OnBadgeContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue == null)
+            {
+                return;
+            }
+
+            Badge badge = d as Badge;
+            RoutedEventArgs args = new RoutedEventArgs();
+            args.RoutedEvent = BadgeContentChangedEvent;
             badge.RaiseEvent(args);
         }
 
