@@ -13,11 +13,14 @@ namespace Rubyer.Converters
         /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var height = (double)values[0];
-            var width = (double)values[1];
-            double verOffset = (height / 2) * -1;
-            double horOffset = verOffset;
-            return new Thickness(0, verOffset, horOffset, 0);
+            if (values[0] is double totalWidth && values[1] is double height && values[2] is double width)
+            {
+                double x = totalWidth - width + (height / 2);
+                double y = (height / 2) * -1;
+                return new Point(x, y);
+            }
+
+            return new Point();
         }
 
         /// <inheritdoc/>
