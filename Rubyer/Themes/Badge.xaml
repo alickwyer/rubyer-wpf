@@ -22,31 +22,33 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Badge}">
-                    <Grid>
-                        <Border x:Name="border"
-                                MinWidth="{TemplateBinding BadgeSize}"
-                                MinHeight="{TemplateBinding BadgeSize}"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Panel.ZIndex="1"
-                                Background="{TemplateBinding BadgeBrush}"
-                                CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}"
-                                RenderTransformOrigin="0.5 0.5">
-                            <Border.RenderTransform>
-                                <ScaleTransform />
-                            </Border.RenderTransform>
-                            <Border.Margin>
+                    <Grid x:Name="root">
+                        <rubyer:AdornerContainer>
+                            <rubyer:AdornerContainer.Offset>
                                 <MultiBinding Converter="{StaticResource BadgeOffsetConverter}">
+                                    <Binding ElementName="root" Path="ActualWidth" />
                                     <Binding ElementName="border" Path="ActualHeight" />
                                     <Binding ElementName="border" Path="ActualWidth" />
+                                    <Binding Path="BadgeSize" RelativeSource="{RelativeSource AncestorType=rubyer:Badge}" />
                                 </MultiBinding>
-                            </Border.Margin>
-                            <TextBlock x:Name="text"
-                                       Margin="5 2"
-                                       HorizontalAlignment="Center"
-                                       FontSize="{TemplateBinding BadgeFontSize}"
-                                       Text="{TemplateBinding Text}" />
-                        </Border>
+                            </rubyer:AdornerContainer.Offset>
+                            <Border x:Name="border"
+                                    MinWidth="{TemplateBinding BadgeSize}"
+                                    MinHeight="{TemplateBinding BadgeSize}"
+                                    Background="{TemplateBinding BadgeBrush}"
+                                    CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}"
+                                    RenderTransformOrigin="0.5 0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform />
+                                </Border.RenderTransform>
+                                <TextBlock x:Name="text"
+                                           Margin="5 2"
+                                           HorizontalAlignment="Center"
+                                           FontSize="{TemplateBinding BadgeFontSize}"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           Text="{TemplateBinding Text}" />
+                            </Border>
+                        </rubyer:AdornerContainer>
 
                         <ContentPresenter Focusable="False"
                                           RecognizesAccessKey="True"
