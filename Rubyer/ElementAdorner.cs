@@ -5,9 +5,10 @@ using System.Windows.Media;
 namespace Rubyer
 {
     /// <summary>
-    /// 标记装饰器
+    /// 元素装饰器
+    /// （传入的元素在 AdornerLayer 显示）
     /// </summary>
-    public class BadgeAdorner : Adorner
+    public class ElementAdorner : Adorner
     {
         private readonly UIElement adorner;
 
@@ -22,15 +23,21 @@ namespace Rubyer
         /// <param name="adornedElement">被装饰元素</param>
         /// <param name="adorner">装饰</param>
         /// <param name="offset">偏移</param>
-        public BadgeAdorner(UIElement adornedElement, FrameworkElement adorner, Point offset)
+        public ElementAdorner(UIElement adornedElement, FrameworkElement adorner, Point offset)
             : base(adornedElement)
         {
             this.adorner = adorner;
 
+            if (adornedElement is FrameworkElement fe)
+            {
+                DataContext = fe.DataContext;
+                fe.DataContextChanged += (_, e) => DataContext = e.NewValue;
+            }
+
             Offset = offset;
 
             var parent = VisualTreeHelper.GetParent(adorner);
-            if (parent is BadgeAdorner badgeAdorner)
+            if (parent is ElementAdorner badgeAdorner)
             {
                 badgeAdorner.RemoveVisualChild(adorner);
             }

@@ -23,7 +23,8 @@
                             </rubyer:Badge>
                             <rubyer:Badge Margin="10"
                                           BadgeBrush="{DynamicResource Dark}"
-                                          BadgeFontSize="20">
+                                          BadgeFontSize="20"
+                                          Text="20">
                                 <Button Style="{DynamicResource OutlineButton}" Width="60">
                                     回复
                                 </Button>
