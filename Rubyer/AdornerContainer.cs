@@ -14,7 +14,7 @@ namespace Rubyer
     public class AdornerContainer : Control
     {
         private AdornerLayer _adornerLayer;
-        private BadgeAdorner _adorner;
+        private ElementAdorner _adorner;
 
         /// <summary>
         /// 显示的元素
@@ -69,7 +69,7 @@ namespace Rubyer
                 _adornerLayer = AdornerLayer.GetAdornerLayer(parentElement);
                 if (_adornerLayer != null)
                 {
-                    _adorner = new BadgeAdorner(parentElement, Element, Offset);
+                    _adorner = new ElementAdorner(parentElement, Element, Offset);
                     _adornerLayer.Add(_adorner);
                 }
             }
