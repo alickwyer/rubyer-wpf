@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -281,7 +282,7 @@ namespace Rubyer
             get { return GetValue(MenuIconProperty); }
             set { SetValue(MenuIconProperty, value); }
         }
-        
+
         #endregion properties
 
         #region options item
@@ -399,6 +400,28 @@ namespace Rubyer
         }
 
         #region methods
+
+
+        /// <inheritdoc/> 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            this.Loaded += HamburgerMenu_Loaded;
+        }
+
+        private void HamburgerMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Loaded -= HamburgerMenu_Loaded;
+
+            // 解决使用 GroupStyle 时首次 SelectedItem 不显示内容的问题
+            if (SelectedItem is { } && SelectedContent is null)
+            {
+                var temp = SelectedItem;
+                SelectedItem = null;
+                SelectedItem = temp;
+            }
+        }
 
         /// <inheritdoc/>
         public override void OnApplyTemplate()
