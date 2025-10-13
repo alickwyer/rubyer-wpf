@@ -151,17 +151,17 @@
                                           Background="{DynamicResource Primary}"
                                           CollapsedWidth="56"
                                           CornerRadius="15"
-                                          ExpandedWidth="250" IsShowHamburgerButton="False"
+                                          ExpandedWidth="250"
                                           FontSize="16"
                                           Foreground="{StaticResource WhiteForeground}"
                                           HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
+                                          IsShowHamburgerButton="False"
                                           IsShowLittleBar="False"
                                           ItemsSource="{Binding Source={StaticResource HamburgerModels}}"
                                           MenuIcon="{Binding IsExpanded, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToMenuIconConverter}}"
                                           OptionsItemsSource="{Binding OptionsModels}"
                                           PaneBackground="{StaticResource Dark}"
                                           PaneBorderCornerRadius="15"
-                                          SelectedIndex="0"
                                           TransitionDuration="0:0:0.5"
                                           TransitionType="FadeLeft">
                         <rubyer:HamburgerMenu.GroupStyle>
@@ -181,7 +181,8 @@
                                                               Background="Transparent"
                                                               BorderThickness="0"
                                                               Foreground="{StaticResource WhiteForeground}"
-                                                              Header="{Binding Name}">
+                                                              Header="{Binding Name}"
+                                                              IsExpanded="True">
                                                         <ItemsPresenter />
                                                     </Expander>
                                                 </ControlTemplate>
@@ -191,11 +192,6 @@
                                 </GroupStyle.ContainerStyle>
                             </GroupStyle>
                         </rubyer:HamburgerMenu.GroupStyle>
-                        <rubyer:HamburgerMenu.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel />
-                            </ItemsPanelTemplate>
-                        </rubyer:HamburgerMenu.ItemsPanel>
                         <rubyer:HamburgerMenu.ItemContainerStyle>
                             <Style TargetType="rubyer:HamburgerMenuItem">
                                 <Setter Property="IconType" Value="{Binding Icon}" />
