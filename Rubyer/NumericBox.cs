@@ -1,14 +1,9 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Rubyer
@@ -301,12 +296,14 @@ namespace Rubyer
 
         private void IncreaseButton_Click(object sender, RoutedEventArgs e)
         {
+            CheckTextValue();
             GetIntervalAndMin(out double interval, out double min);
             Value = GetCalculatedValue(this, Value == null ? min + interval : Value.GetValueOrDefault() + interval);
         }
 
         private void DecreaseButton_Click(object sender, RoutedEventArgs e)
         {
+            CheckTextValue();
             GetIntervalAndMin(out double interval, out double min);
             Value = GetCalculatedValue(this, Value == null ? min : Value.GetValueOrDefault() - interval);
         }
