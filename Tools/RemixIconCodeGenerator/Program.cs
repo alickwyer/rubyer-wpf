@@ -55,8 +55,8 @@ namespace RemixIconCodeGenerator
             var datas = dataStringBuilder.ToString();
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                Clipboard.SetText(types);
-                //Clipboard.SetText(datas);
+                //Clipboard.SetText(types);
+                Clipboard.SetText(datas);
             }));
 
 
