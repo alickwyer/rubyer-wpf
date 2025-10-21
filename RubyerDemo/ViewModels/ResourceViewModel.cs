@@ -36,16 +36,26 @@ namespace RubyerDemo.ViewModels
         [RelayCommand]
         private void CopyColor(ColorInfo colorInfo)
         {
-            Clipboard.SetText($"<Color x:Key=\"{colorInfo.Key}\">{colorInfo.Color}</Color>");
+            ClearColorsCoyied();
+            var text = $"<Color x:Key=\"{colorInfo.Key}\">{colorInfo.Color}</Color>";
+            Clipboard.SetText(text);
+            colorInfo.IsCopied = true;
+        }
+
+        private void ClearColorsCoyied()
+        {
+            LightColorInfos.ForEach(x => x.IsCopied = false);
+            DarkColorInfos.ForEach(x => x.IsCopied = false);
         }
     }
 
-    public class ColorInfo
+    public partial class ColorInfo : ObservableObject
     {
         public Color Color { get; set; }
         public string Key { get; set; }
         public string Hex { get; set; }
         public string Description { get; set; }
+        [ObservableProperty] private bool isCopied;
 
         public ColorInfo(Color color, string key, string description)
         {
