@@ -26,4 +26,12 @@
     <Color x:Key="DarkWindowTitleBackgroundColor">#3A3A3A</Color>
     <Color x:Key="DarkStatusBarBackgroundColor">#292929</Color>
     <Color x:Key="DarkPanelBackgroundColor">#323232</Color>
+
+    <Color x:Key="DarkWhiteForegroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkBlackForegroundColor">#000000</Color>
+    <Color x:Key="DarkErrorColor">#E63935</Color>
+    <Color x:Key="DarkInfoColor">#909399</Color>
+    <Color x:Key="DarkWarningColor">#F57C00</Color>
+    <Color x:Key="DarkSuccessColor">#43A047</Color>
+    <Color x:Key="DarkQuestionColor">#2196F3</Color>
 </ResourceDictionary>

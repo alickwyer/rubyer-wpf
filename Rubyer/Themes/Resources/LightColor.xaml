@@ -26,4 +26,12 @@
     <Color x:Key="LightWindowTitleBackgroundColor">#F7F7F7</Color>
     <Color x:Key="LightStatusBarBackgroundColor">#E5E5E5</Color>
     <Color x:Key="LightPanelBackgroundColor">#F0F0F0</Color>
+
+    <Color x:Key="LightWhiteForegroundColor">#FFFFFF</Color>
+    <Color x:Key="LightBlackForegroundColor">#000000</Color>
+    <Color x:Key="LightErrorColor">#E63935</Color>
+    <Color x:Key="LightInfoColor">#909399</Color>
+    <Color x:Key="LightWarningColor">#F57C00</Color>
+    <Color x:Key="LightSuccessColor">#43A047</Color>
+    <Color x:Key="LightQuestionColor">#2196F3</Color>
 </ResourceDictionary>

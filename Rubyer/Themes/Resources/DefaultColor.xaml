@@ -4,7 +4,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/LightColor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/DarkColor.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightDefaultForegroundColor}" />
     <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightDefaultBackgroundColor}" />
     <SolidColorBrush x:Key="FloatBackground" Color="{DynamicResource LightFloatBackgroundColor}" />
@@ -29,12 +29,12 @@
     <SolidColorBrush x:Key="WindowTitleBackground" Color="{DynamicResource LightWindowTitleBackgroundColor}" />
     <SolidColorBrush x:Key="StatusBarBackground" Color="{DynamicResource LightStatusBarBackgroundColor}" />
     <SolidColorBrush x:Key="PanelBackground" Color="{DynamicResource LightPanelBackgroundColor}" />
-    
-    <SolidColorBrush x:Key="WhiteForeground" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="BlackForeground" Color="#000000" />
-    <SolidColorBrush x:Key="Error" Color="#E63935" />
-    <SolidColorBrush x:Key="Info" Color="#909399" />
-    <SolidColorBrush x:Key="Warning" Color="#F57C00" />
-    <SolidColorBrush x:Key="Success" Color="#43A047" />
-    <SolidColorBrush x:Key="Question" Color="#2196F3" />
+
+    <SolidColorBrush x:Key="WhiteForeground" Color="{DynamicResource LightWhiteForegroundColor}" />
+    <SolidColorBrush x:Key="BlackForeground" Color="{DynamicResource LightBlackForegroundColor}" />
+    <SolidColorBrush x:Key="Error" Color="{DynamicResource LightErrorColor}" />
+    <SolidColorBrush x:Key="Info" Color="{DynamicResource LightInfoColor}" />
+    <SolidColorBrush x:Key="Warning" Color="{DynamicResource LightWarningColor}" />
+    <SolidColorBrush x:Key="Success" Color="{DynamicResource LightSuccessColor}" />
+    <SolidColorBrush x:Key="Question" Color="{DynamicResource LightQuestionColor}" />
 </ResourceDictionary>
