@@ -18,7 +18,7 @@
                                     ThemeMode="System" />
 
                 <!--<ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Generic.xaml" />-->
-                
+
                 <!--<ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/en-US.xaml" />-->
 
                 <ResourceDictionary Source="pack://application:,,,/RubyerDemo;component/Themes/Generic.xaml" />
