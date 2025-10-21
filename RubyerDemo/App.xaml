@@ -11,10 +11,18 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Generic.xaml" />
+                <rubyer:RubyerTheme ContainerCornerRadius="10"
+                                    ControlCornerRadius="6"
+                                    CultureName="zh-CN"
+                                    DefaultFontSize="14"
+                                    ThemeMode="System" />
+
+                <!--<ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Generic.xaml" />-->
+                
+                <!--<ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/en-US.xaml" />-->
+
                 <ResourceDictionary Source="pack://application:,,,/RubyerDemo;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ShowMeTheXAML.AvalonEdit;component/Themes/Default.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/en-US.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
 
             <Style BasedOn="{StaticResource {x:Type smtx:XamlDisplay}}" TargetType="smtx:XamlDisplay">

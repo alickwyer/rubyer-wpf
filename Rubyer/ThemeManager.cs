@@ -1,13 +1,15 @@
-﻿using Rubyer.Enums;
-using System;
-using System.Windows.Media.Animation;
-using System.Windows.Media;
-using System.Windows;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using Rubyer.Enums;
 using Rubyer.Models;
-using System.Linq;
-using System.Windows.Media.Effects;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace Rubyer
 {
@@ -19,7 +21,7 @@ namespace Rubyer
         /// <summary>
         /// 所有颜色 key
         /// </summary>
-        private static List<string> ColorKeys =
+        public static List<string> ColorKeys { get; private set; } =
         [
             "DefaultForeground",
             "DefaultBackground",
@@ -89,14 +91,14 @@ namespace Rubyer
             return (int)registryValueObject <= 0;
         }
 
-        private static ColorAnimation GetColorAnimation(bool isDark, Color lightColor, Color darkColor)
+        private static ColorAnimation GetColorAnimation(bool isDark, Color color)
         {
             themeApplying = true;
 
             var animation = new ColorAnimation
             {
                 Duration = TimeSpan.FromMilliseconds(600),
-                To = isDark ? darkColor : lightColor,
+                To = color,
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
@@ -120,10 +122,14 @@ namespace Rubyer
                 darkColor = (Color)application.FindResource($"Dark{colorName}Color");
             }
 
-
-            if (application.Resources[colorName] is Brush brush)
+            if (application.Resources[colorName] is SolidColorBrush brush)
             {
-                ColorAnimation animation = GetColorAnimation(isDark, lightColor, darkColor);
+                var color = isDark ? darkColor : lightColor;
+
+                if (brush.Color == color)
+                    return;
+
+                ColorAnimation animation = GetColorAnimation(isDark, color);
 
                 if (brush.IsFrozen)
                 {
@@ -234,6 +240,36 @@ namespace Rubyer
             Application.Current.Resources["RightControlCornerRadius"] = new CornerRadius(0, cornerRadius, cornerRadius, 0);
             Application.Current.Resources["TopControlCornerRadius"] = new CornerRadius(cornerRadius, cornerRadius, 0, 0);
             Application.Current.Resources["BottomControlCornerRadius"] = new CornerRadius(0, 0, cornerRadius, cornerRadius);
+        }
+
+        /// <summary>
+        /// 切换语言
+        /// </summary>
+        /// <param name="cultureName">语言</param>
+        public static void SwitchCulture(string cultureName)
+        {
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName);
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
+
+            string url = $"pack://application:,,,/Rubyer;component/Themes/Resources/I18N/{cultureName}.xaml";
+            var resourceDictionaries = Application.Current.Resources.MergedDictionaries;
+            var resourceDictionary = new ResourceDictionary { Source = new Uri(url, UriKind.RelativeOrAbsolute) };
+            if (resourceDictionaries.Any(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
+            {
+                var oldColorResource = resourceDictionaries.FirstOrDefault(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri);
+                resourceDictionaries.Remove(oldColorResource);
+            }
+
+            resourceDictionaries.Add(resourceDictionary);
+        }
+
+        /// <summary>
+        /// 设置默认文字大小
+        /// </summary>
+        /// <param name="fontSize">文字大小</param>
+        public static void SwitchDefaultFontSize(double fontSize)
+        {
+            Application.Current.Resources["DefaultFontSize"] = fontSize;
         }
 
         private static bool CheckIsDark(Brush brush)

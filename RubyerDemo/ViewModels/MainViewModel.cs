@@ -86,6 +86,7 @@ namespace RubyerDemo.ViewModels
             ];
 
             ViewItems = [.. views.OrderBy(x => x.Name)];
+            ViewItems.Insert(0, new("Resource", "资源", new ResourceView(), IconType.Home2Line));
             ViewItems.Insert(0, new("Overview", "总览", new Overview(), IconType.Home2Line));
             CurrentViewItem = ViewItems.First();
 

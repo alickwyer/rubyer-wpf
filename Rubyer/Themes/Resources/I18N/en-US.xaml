@@ -20,7 +20,7 @@
     <system:String x:Key="I18N_PageBar_Forward5Pages">Forward 5 Pages</system:String>
     <system:String x:Key="I18N_PageBar_Backwards5Pages">Backwards 5 Pages</system:String>
 
-    <system:String x:Key="I18N_Clock_Hour">h</system:String>
+    <system:String x:Key="I18N_Clock_Hour">hour</system:String>
     <system:String x:Key="I18N_Clock_Minute">min</system:String>
     <system:String x:Key="I18N_Clock_Second">s</system:String>
     <system:String x:Key="I18N_Clock_Ok">OK</system:String>
