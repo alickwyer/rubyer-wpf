@@ -173,8 +173,7 @@
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
 
-    <rubyer:HamburgerMenu rubyer:ControlHelper.CornerRadius="0"
-                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
+    <rubyer:HamburgerMenu rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.MaskOpacity="1"
                           rubyer:ControlHelper.SelectedBrush="{DynamicResource Accent}"

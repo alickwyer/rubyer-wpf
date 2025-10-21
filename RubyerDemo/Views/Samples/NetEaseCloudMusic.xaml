@@ -9,6 +9,7 @@
                      Height="700"
                      FontSize="15"
                      TitleBackground="{DynamicResource Primary}"
+                     TitleForeground="{StaticResource WhiteForeground}"
                      TitleHeight="60"
                      mc:Ignorable="d">
     <rubyer:RubyerWindow.Resources>

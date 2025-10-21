@@ -41,7 +41,9 @@
                                 <Border.RenderTransform>
                                     <ScaleTransform />
                                 </Border.RenderTransform>
-                                <rubyer:OverlayPanel Margin="5 2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <rubyer:OverlayPanel Margin="5 2"
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center">
                                     <TextBlock x:Name="text"
                                                FontSize="{TemplateBinding BadgeFontSize}"
                                                Foreground="{TemplateBinding Foreground}"
@@ -66,8 +68,8 @@
                         </Trigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True"/>
-                                <Condition Binding="{Binding BadgeContent, RelativeSource={RelativeSource Self}}" Value="{x:Null}"/>
+                                <Condition Binding="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True" />
+                                <Condition Binding="{Binding BadgeContent, RelativeSource={RelativeSource Self}}" Value="{x:Null}" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="text" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="badgeContent" Property="Visibility" Value="Collapsed" />

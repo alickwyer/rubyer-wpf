@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="LightDefaultForegroundColor">#252526</Color>
+    <Color x:Key="LightDefaultBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="LightFloatBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="LightControlBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="LightContainerBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="LightPrimaryColor">#2196F3</Color>
+    <Color x:Key="LightAccentColor">#F50057</Color>
+    <Color x:Key="LightLightColor">#6EC6FF</Color>
+    <Color x:Key="LightDarkColor">#0069C0</Color>
+    <Color x:Key="LightSecondaryColor">#E3E3E3</Color>
+    <Color x:Key="LightSecondaryForegroundColor">#252526</Color>
+    <Color x:Key="LightBorderColor">#9E9E9E</Color>
+    <Color x:Key="LightBorderLightColor">#CFCFCF</Color>
+    <Color x:Key="LightBorderLighterColor">#E0E0E0</Color>
+    <Color x:Key="LightSeconarydTextColor">#CC9E9E9E</Color>
+    <Color x:Key="LightWatermarkTextColor">#BB6D6D6D</Color>
+    <Color x:Key="LightEffectColor">#969696</Color>
+    <Color x:Key="LightMaskColor">#9E9E9E</Color>
+    <Color x:Key="LightMaskDarkColor">#6D6D6D</Color>
+    <Color x:Key="LightDialogBackgroundColor">#99373737</Color>
+    <Color x:Key="LightHeaderBackgroundColor">#E5E5E5</Color>
+    <Color x:Key="LightScrollBarBrushColor">#CFCFCF</Color>
+    <Color x:Key="LightWindowTitleBackgroundColor">#F7F7F7</Color>
+    <Color x:Key="LightStatusBarBackgroundColor">#E5E5E5</Color>
+    <Color x:Key="LightPanelBackgroundColor">#F0F0F0</Color>
+
+    <Color x:Key="LightWhiteForegroundColor">#FFFFFF</Color>
+    <Color x:Key="LightBlackForegroundColor">#000000</Color>
+    <Color x:Key="LightErrorColor">#E63935</Color>
+    <Color x:Key="LightInfoColor">#909399</Color>
+    <Color x:Key="LightWarningColor">#F57C00</Color>
+    <Color x:Key="LightSuccessColor">#43A047</Color>
+    <Color x:Key="LightQuestionColor">#2196F3</Color>
+</ResourceDictionary>

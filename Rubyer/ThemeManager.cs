@@ -1,13 +1,15 @@
-﻿using Rubyer.Enums;
-using System;
-using System.Windows.Media.Animation;
-using System.Windows.Media;
-using System.Windows;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using Rubyer.Enums;
 using Rubyer.Models;
-using System.Linq;
-using System.Windows.Media.Effects;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace Rubyer
 {
@@ -19,46 +21,60 @@ namespace Rubyer
         /// <summary>
         /// 所有颜色 key
         /// </summary>
-        private static List<string> ColorKeys =
-        [
-            "DefaultForeground",
-            "DefaultBackground",
-            "Primary",
-            "Secondary",
-            "SecondaryForeground",
-            "Accent",
-            "Light",
-            "Dark",
-            "Border",
-            "BorderLight",
-            "BorderLighter",
-            "SeconarydText",
-            "WatermarkText",
-            "Mask",
-            "MaskDark",
-            "DialogBackground",
-            "HeaderBackground",
-            "FloatBackground",
-            "AllDirectionEffect",
-            "AllDirectionEffect2",
-            "AllDirectionEffect3",
-            "AllDirectionEffect4",
-            "AllDirectionEffect5",
-            "RightTopEffect",
-            "LeftTopEffect",
-            "RightBottomEffect",
-            "LeftBottomEffect",
-            "TopEffect",
-            "BottomEffect",
-            "RightEffect",
-            "LeftEffect",
-            "ControlBackground",
-            "ContainerBackground",
-            "ScrollBarBrush",
-            "WindowTitleBackground",
-            "StatusBarBackground",
-            "PanelBackground",
-        ];
+        public static Dictionary<string, string> ColorKeys { get; private set; } = new Dictionary<string, string>
+        {
+            {"DefaultForeground", "默认前景色"},
+            {"DefaultBackground", "默认背景色"},
+            {"Primary", "主色"},
+            {"Secondary", "次色"},
+            {"SecondaryForeground", "次色前景"},
+            {"Accent", "强调色"},
+            {"Light", "亮色"},
+            {"Dark", "暗色"},
+            {"Border", "边框色"},
+            {"BorderLight", "边框亮色"},
+            {"BorderLighter", "边框最亮色"},
+            {"SeconarydText", "次色文本"},
+            {"WatermarkText", "水印文本"},
+            {"Mask", "控件遮罩"},
+            {"MaskDark", "控件遮罩暗色"},
+            {"DialogBackground", "弹窗背景色"},
+            {"HeaderBackground", "标题色"},
+            {"FloatBackground", "弹出菜单色"},
+            {"ControlBackground", "控件背景色"},
+            {"ContainerBackground", "容器背景色"},
+            {"ScrollBarBrush", "滚动条颜色"},
+            {"WindowTitleBackground", "窗体标题背景色"},
+            {"StatusBarBackground", "状态栏背景色"},
+            {"PanelBackground", "面板背景色"},
+            {"WhiteForeground", "白色前景色"},
+            {"BlackForeground", "黑色前景色"},
+            {"Error", "错误色"},
+            {"Info", "信息色"},
+            {"Warning", "警告色"},
+            {"Success", "成功色"},
+            {"Question", "确认色"},
+        };
+
+        /// <summary>
+        /// 所有阴影 key
+        /// </summary>
+        public static Dictionary<string, string> EffectKeys { get; private set; } = new Dictionary<string, string>
+        {
+            {"AllDirectionEffect", "全方向阴影"},
+            {"AllDirectionEffect2", "全方向阴影2"},
+            {"AllDirectionEffect3", "全方向阴影3"},
+            {"AllDirectionEffect4", "全方向阴影4"},
+            {"AllDirectionEffect5", "全方向阴影5"},
+            {"RightTopEffect", "右上阴影"},
+            {"LeftTopEffect", "左上阴影"},
+            {"RightBottomEffect", "右下阴影"},
+            {"LeftBottomEffect", "左下阴影"},
+            {"TopEffect", "上阴影"},
+            {"BottomEffect", "下阴影"},
+            {"LeftEffect", "左阴影"},
+            {"RightEffect", "右阴影"},
+        };
 
         private static bool themeApplying = false;
 
@@ -89,14 +105,24 @@ namespace Rubyer
             return (int)registryValueObject <= 0;
         }
 
-        private static ColorAnimation GetColorAnimation(bool isDark, Color lightColor, Color darkColor)
+        public static string GetLightColor(Application application, string colorName)
+        {
+            return colorName.Contains("Effect") ? "LightEffectColor" : $"Light{colorName}Color";
+        }
+
+        public static string GetDarkColor(Application application, string colorName)
+        {
+            return colorName.Contains("Effect") ? "DarkEffectColor" : $"Dark{colorName}Color";
+        }
+
+        private static ColorAnimation GetColorAnimation(bool isDark, Color color)
         {
             themeApplying = true;
 
             var animation = new ColorAnimation
             {
                 Duration = TimeSpan.FromMilliseconds(600),
-                To = isDark ? darkColor : lightColor,
+                To = color,
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
@@ -107,23 +133,17 @@ namespace Rubyer
         private static void ApplyColor(bool isDark, string colorName)
         {
             var application = Application.Current;
-            Color lightColor;
-            Color darkColor;
-            if (colorName.Contains("Effect"))
-            {
-                lightColor = (Color)application.FindResource($"LightEffectColor");
-                darkColor = (Color)application.FindResource($"DarkEffectColor");
-            }
-            else
-            {
-                lightColor = (Color)application.FindResource($"Light{colorName}Color");
-                darkColor = (Color)application.FindResource($"Dark{colorName}Color");
-            }
+            Color lightColor = (Color)application.FindResource(GetLightColor(application, colorName));
+            Color darkColor = (Color)application.FindResource(GetDarkColor(application, colorName));
 
-
-            if (application.Resources[colorName] is Brush brush)
+            if (application.Resources[colorName] is SolidColorBrush brush)
             {
-                ColorAnimation animation = GetColorAnimation(isDark, lightColor, darkColor);
+                var color = isDark ? darkColor : lightColor;
+
+                if (brush.Color == color)
+                    return;
+
+                ColorAnimation animation = GetColorAnimation(isDark, color);
 
                 if (brush.IsFrozen)
                 {
@@ -134,7 +154,15 @@ namespace Rubyer
 
                 application.Resources[colorName] = brush;
             }
-            else if (application.Resources[colorName] is DropShadowEffect effect)
+        }
+
+        private static void ApplyEffect(bool isDark, string effectName)
+        {
+            var application = Application.Current;
+            Color lightColor = (Color)application.FindResource(GetLightColor(application, effectName));
+            Color darkColor = (Color)application.FindResource(GetDarkColor(application, effectName));
+
+            if (application.Resources[effectName] is DropShadowEffect effect)
             {
                 if (effect.IsFrozen)
                 {
@@ -142,7 +170,7 @@ namespace Rubyer
                 }
 
                 effect.Color = isDark ? darkColor : lightColor;
-                application.Resources[colorName] = effect;
+                application.Resources[effectName] = effect;
             }
         }
 
@@ -162,7 +190,12 @@ namespace Rubyer
         {
             foreach (var colorKey in ColorKeys)
             {
-                ApplyColor(isDark, colorKey);
+                ApplyColor(isDark, colorKey.Key);
+            }
+
+            foreach (var effectKey in EffectKeys)
+            {
+                ApplyEffect(isDark, effectKey.Key);
             }
 
             var currentThemeColor = GetCurrentThemeColor(Application.Current);
@@ -236,6 +269,36 @@ namespace Rubyer
             Application.Current.Resources["BottomControlCornerRadius"] = new CornerRadius(0, 0, cornerRadius, cornerRadius);
         }
 
+        /// <summary>
+        /// 切换语言
+        /// </summary>
+        /// <param name="cultureName">语言</param>
+        public static void SwitchCulture(string cultureName)
+        {
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName);
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
+
+            string url = $"pack://application:,,,/Rubyer;component/Themes/Resources/I18N/{cultureName}.xaml";
+            var resourceDictionaries = Application.Current.Resources.MergedDictionaries;
+            var resourceDictionary = new ResourceDictionary { Source = new Uri(url, UriKind.RelativeOrAbsolute) };
+            if (resourceDictionaries.Any(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
+            {
+                var oldColorResource = resourceDictionaries.FirstOrDefault(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri);
+                resourceDictionaries.Remove(oldColorResource);
+            }
+
+            resourceDictionaries.Add(resourceDictionary);
+        }
+
+        /// <summary>
+        /// 设置默认文字大小
+        /// </summary>
+        /// <param name="fontSize">文字大小</param>
+        public static void SwitchDefaultFontSize(double fontSize)
+        {
+            Application.Current.Resources["DefaultFontSize"] = fontSize;
+        }
+
         private static bool CheckIsDark(Brush brush)
         {
             if (brush is SolidColorBrush color)
@@ -284,7 +347,7 @@ namespace Rubyer
         {
             for (int i = 0; i < keys.Length; i++)
             {
-                ColorKeys.Add(keys[i]);
+                ColorKeys.Add(keys[i], string.Empty);
             }
         }
     }

@@ -51,7 +51,7 @@ namespace RubyerDemo
         {
             controlSlider.Value = ((CornerRadius)App.Current.Resources["AllControlCornerRadius"]).TopLeft;
             contrainerSlider.Value = ((CornerRadius)App.Current.Resources["AllContainerCornerRadius"]).TopLeft;
-            ThemeManager.SwitchThemeMode(Rubyer.Enums.ThemeMode.System);
+            //ThemeManager.SwitchThemeMode(Rubyer.Enums.ThemeMode.System);
             darkMode.IsChecked = ThemeManager.GetIsAppDarkMode();
         }
 

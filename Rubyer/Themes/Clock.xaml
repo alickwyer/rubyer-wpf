@@ -67,7 +67,7 @@
                                                        Padding="5 6"
                                                        DockPanel.Dock="Top"
                                                        Foreground="{StaticResource WatermarkText}"
-                                                       Text="{StaticResource I18N_Clock_Hour}"
+                                                       Text="{DynamicResource I18N_Clock_Hour}"
                                                        TextAlignment="Center" />
 
                                             <rubyer:FlipView x:Name="hourFlipView"
@@ -89,7 +89,7 @@
                                                        Padding="5 6"
                                                        DockPanel.Dock="Top"
                                                        Foreground="{StaticResource WatermarkText}"
-                                                       Text="{StaticResource I18N_Clock_Minute}"
+                                                       Text="{DynamicResource I18N_Clock_Minute}"
                                                        TextAlignment="Center" />
                                             <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
                                                              Height="Auto"
@@ -105,7 +105,7 @@
                                                        Padding="5 6"
                                                        DockPanel.Dock="Top"
                                                        Foreground="{StaticResource WatermarkText}"
-                                                       Text="{StaticResource I18N_Clock_Second}"
+                                                       Text="{DynamicResource I18N_Clock_Second}"
                                                        TextAlignment="Center" />
                                             <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
                                                              Height="Auto"

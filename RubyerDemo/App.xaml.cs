@@ -55,6 +55,7 @@ namespace RubyerDemo
 
             // View models
             services.AddSingleton<MainViewModel>();
+            services.AddSingleton<ResourceViewModel>();
             services.AddSingleton<IconViewModel>();
             services.AddSingleton<ListViewModel>();
             services.AddSingleton<DataGridViewModel>();
