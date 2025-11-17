@@ -185,13 +185,25 @@ namespace Rubyer
 
         private void RenameCancelHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            textBox.Text = Text;
-            IsRenaming = false;
+            var hasError = Validation.GetHasError(this);
+            if (!hasError)
+            {
+                textBox.Text = Text;
+                IsRenaming = false;
+            }
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            IsRenaming = false;
+            var hasError = Validation.GetHasError(this);
+            if (!hasError)
+            {
+                IsRenaming = false;
+            }
+            else
+            {
+                IsRenaming = true;
+            }
         }
 
         private static void OnIsRenamingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

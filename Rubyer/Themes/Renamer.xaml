@@ -50,6 +50,13 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           Visibility="{TemplateBinding IsRenaming, Converter={StaticResource BooleanToHiddenConverter}}" />
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter TargetName="PART_TextBox" Property="BorderBrush" Value="{DynamicResource Error}" />
+                            <Setter TargetName="PART_TextBox" Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Error}" />
+                            <Setter TargetName="PART_TextBox" Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Error}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
