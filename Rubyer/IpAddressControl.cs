@@ -236,13 +236,16 @@ namespace Rubyer
         private static void OnAddressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var ip = (IpAddressControl)d;
-            var octets = ip.Address.Split('.');
-            if (octets.Length >= 4)
+            if (ip.Address is { })
             {
-                ip.Octet1 = octets[0];
-                ip.Octet2 = octets[1];
-                ip.Octet3 = octets[2];
-                ip.Octet4 = octets[3];
+                var octets = ip.Address.Split('.');
+                if (octets.Length >= 4)
+                {
+                    ip.Octet1 = octets[0];
+                    ip.Octet2 = octets[1];
+                    ip.Octet3 = octets[2];
+                    ip.Octet4 = octets[3];
+                }
             }
         }
 

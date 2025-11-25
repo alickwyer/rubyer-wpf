@@ -7,7 +7,7 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
-             d:DataContext="{d:DesignInstance Type=viewmodels:TextBoxViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:IpAddressControlViewModel}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="IpAddressControlDemo">
         <ScrollViewer>
@@ -18,8 +18,9 @@
                     <StackPanel rubyer:PanelHelper.Spacing="10">
                         <rubyer:IpAddressControl x:Name="ip"
                                                  Width="150"
-                                                 Address="{Binding Text, ElementName=text}" />
-                        <TextBox x:Name="text" />
+                                                 Address="{Binding IpAddress}" />
+                        <TextBox x:Name="text" Text="{Binding IpAddress}" />
+                        <Button Command="{Binding SetIpCommand}" Content="192.168.1.1" />
                     </StackPanel>
                 </controls:ControlDisplay>
             </Grid>
