@@ -68,7 +68,7 @@ namespace Rubyer
         public int CurrentIndex
         {
             get { return (int)GetValue(CurrentIndexProperty); }
-            internal set { SetValue(CurrentIndexProperty, value); }
+            set { SetValue(CurrentIndexProperty, value); }
         }
 
         /// <summary>

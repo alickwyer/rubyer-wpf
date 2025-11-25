@@ -74,7 +74,7 @@
                                                              Style="{StaticResource SelecterFlipView}"
                                                              Height="Auto"
                                                              ItemStringFormat="D2"
-                                                             ItemsSource="{TemplateBinding Hours}"
+                                                             ItemsSource="{Binding Hours, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                              SelectedItem="{Binding Hour, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                         </DockPanel>
 
@@ -94,7 +94,7 @@
                                             <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
                                                              Height="Auto"
                                                              ItemStringFormat="D2"
-                                                             ItemsSource="{TemplateBinding Minutes}"
+                                                             ItemsSource="{Binding Minutes, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                              SelectedItem="{Binding Minute, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                         </DockPanel>
 
@@ -110,7 +110,7 @@
                                             <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
                                                              Height="Auto"
                                                              ItemStringFormat="D2"
-                                                             ItemsSource="{TemplateBinding Seconds}"
+                                                             ItemsSource="{Binding Seconds, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                              SelectedItem="{Binding Second, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                         </DockPanel>
                                     </UniformGrid>
@@ -158,7 +158,7 @@
                                           rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_Clock_Hour}"
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
-                                          ItemsSource="{TemplateBinding Hours}"
+                                          ItemsSource="{Binding Hours, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           SelectedItem="{Binding Hour, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 <ComboBox MinWidth="80"
                                           Margin="2 0"
@@ -167,7 +167,7 @@
                                           rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_Clock_Minute}"
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
-                                          ItemsSource="{TemplateBinding Minutes}"
+                                          ItemsSource="{Binding Minutes, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           SelectedItem="{Binding Minute, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 <ComboBox MinWidth="80"
                                           Margin="2 0"
@@ -176,7 +176,7 @@
                                           rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_Clock_Second}"
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
-                                          ItemsSource="{TemplateBinding Seconds}"
+                                          ItemsSource="{Binding Seconds, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           SelectedItem="{Binding Second, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </UniformGrid>
                         </Border>

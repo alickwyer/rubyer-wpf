@@ -23,7 +23,7 @@ namespace Rubyer
         /// <summary>
         /// 是否为表头全选 CheckBox
         /// </summary>
-        internal static readonly DependencyProperty IsHeaderSelectCheckBoxProperty = DependencyProperty.RegisterAttached(
+        public static readonly DependencyProperty IsHeaderSelectCheckBoxProperty = DependencyProperty.RegisterAttached(
             "IsHeaderSelectCheckBox", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsHeaderSelectCheckBoxChanged));
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="value">If true, value.</param>
-        internal static void SetIsHeaderSelectCheckBox(DependencyObject element, bool value)
+        public static void SetIsHeaderSelectCheckBox(DependencyObject element, bool value)
         {
             element.SetValue(IsHeaderSelectCheckBoxProperty, BooleanBoxes.Box(value));
         }
@@ -41,7 +41,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="element">The element.</param>
         /// <returns>A bool.</returns>
-        internal static bool GetIsHeaderSelectCheckBox(DependencyObject element)
+        public static bool GetIsHeaderSelectCheckBox(DependencyObject element)
         {
             return (bool)element.GetValue(IsHeaderSelectCheckBoxProperty);
         }
