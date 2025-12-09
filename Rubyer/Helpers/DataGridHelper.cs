@@ -515,7 +515,7 @@ namespace Rubyer
             {
                 foreach (var column in dataGrid.Columns)
                 {
-                    if (column is DataGridTextColumn textColumn && textColumn.EditingElementStyle is null)
+                    if (column is DataGridTextColumn textColumn)
                     {
                         if (DataGridTextColumn.DefaultEditingElementStyle == textColumn.EditingElementStyle)
                         {
