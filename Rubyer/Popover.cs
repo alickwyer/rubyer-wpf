@@ -313,30 +313,30 @@ namespace Rubyer
             {
                 case PopoverTriggerMode.None:
                     popup.StaysOpen = true;
-                    PreviewMouseLeftButtonUp -= Popover_MouseLeftButtonDown;
-                    MouseEnter -= Popover_MouseEnter;
-                    MouseLeave -= Popover_MouseLeave;
-                    GotFocus -= Popover_GotFocus;
-                    LostFocus -= Popover_LostFocus;
-                    PreviewMouseRightButtonUp -= Popover_MouseRightButtonDown;
+                    WeakEventManager<Popover, MouseButtonEventArgs>.RemoveHandler(this, "PreviewMouseLeftButtonUp", Popover_MouseLeftButtonDown);
+                    WeakEventManager<Popover, MouseEventArgs>.RemoveHandler(this, "MouseEnter", Popover_MouseEnter);
+                    WeakEventManager<Popover, MouseEventArgs>.RemoveHandler(this, "MouseLeave", Popover_MouseLeave);
+                    WeakEventManager<Popover, RoutedEventArgs>.RemoveHandler(this, "GotFocus", Popover_GotFocus);
+                    WeakEventManager<Popover, RoutedEventArgs>.RemoveHandler(this, "LostFocus", Popover_LostFocus);
+                    WeakEventManager<Popover, MouseButtonEventArgs>.RemoveHandler(this, "PreviewMouseRightButtonUp", Popover_MouseRightButtonDown);
                     break;
                 case PopoverTriggerMode.Click:
                     popup.StaysOpen = false;
-                    PreviewMouseLeftButtonUp += Popover_MouseLeftButtonDown;
+                    WeakEventManager<Popover, MouseButtonEventArgs>.AddHandler(this, "PreviewMouseLeftButtonUp", Popover_MouseLeftButtonDown);
                     break;
                 case PopoverTriggerMode.Hover:
                     popup.StaysOpen = true;
-                    MouseEnter += Popover_MouseEnter;
-                    MouseLeave += Popover_MouseLeave;
+                    WeakEventManager<Popover, MouseEventArgs>.AddHandler(this, "MouseEnter", Popover_MouseEnter);
+                    WeakEventManager<Popover, MouseEventArgs>.AddHandler(this, "MouseLeave", Popover_MouseLeave);
                     break;
                 case PopoverTriggerMode.Focus:
                     popup.StaysOpen = false;
-                    GotFocus += Popover_GotFocus;
-                    LostFocus += Popover_LostFocus;
+                    WeakEventManager<Popover, RoutedEventArgs>.AddHandler(this, "GotFocus", Popover_GotFocus);
+                    WeakEventManager<Popover, RoutedEventArgs>.AddHandler(this, "LostFocus", Popover_LostFocus);
                     break;
                 case PopoverTriggerMode.ContextMenu:
                     popup.StaysOpen = false;
-                    PreviewMouseRightButtonUp += Popover_MouseRightButtonDown;
+                    WeakEventManager<Popover, MouseButtonEventArgs>.AddHandler(this, "PreviewMouseRightButtonUp", Popover_MouseRightButtonDown);
                     break;
             }
         }
