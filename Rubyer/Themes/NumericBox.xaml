@@ -26,6 +26,7 @@
         <Setter Property="Padding" Value="0 5" />
         <Setter Property="MinValue" Value="{x:Static system:Double.MinValue}" />
         <Setter Property="MaxValue" Value="{x:Static system:Double.MaxValue}" />
+        <Setter Property="IsPasteTextEnabled" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />

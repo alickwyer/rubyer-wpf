@@ -237,6 +237,20 @@ namespace Rubyer
             set { SetValue(IsReadOnlyProperty, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 是否启用粘贴文本
+        /// </summary>
+        public static readonly DependencyProperty IsPasteTextEnabledProperty = DependencyProperty.Register(
+           "IsPasteTextEnabled", typeof(bool), typeof(NumericBox), new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        /// <summary>
+        /// 是否启用粘贴文本
+        /// </summary>
+        public bool IsPasteTextEnabled
+        {
+            get { return (bool)GetValue(IsPasteTextEnabledProperty); }
+            set { SetValue(IsPasteTextEnabledProperty, BooleanBoxes.Box(value)); }
+        }
         #endregion propteries
 
         #region methods
@@ -251,7 +265,7 @@ namespace Rubyer
                 WeakEventManager<UIElement, TextCompositionEventArgs>.AddHandler(textBox, "PreviewTextInput", TextBox_PreviewTextInput);
                 WeakEventManager<UIElement, KeyEventArgs>.AddHandler(textBox, "PreviewKeyDown", TextBox_PreviewKeyDown);
                 WeakEventManager<UIElement, RoutedEventArgs>.AddHandler(textBox, "LostFocus", TextBox_LostFocus);
-                //textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
+                textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
                 this.textBox = textBox;
             }
 
@@ -374,8 +388,11 @@ namespace Rubyer
         private void TextBox_CanExecutePaste(object sender, CanExecuteRoutedEventArgs e)
         {
             // 限制粘贴
-            e.CanExecute = false;
-            e.Handled = true;
+            if (!IsPasteTextEnabled)
+            {
+                e.CanExecute = false;
+                e.Handled = true;
+            }
         }
 
         private void CheckTextValue()
