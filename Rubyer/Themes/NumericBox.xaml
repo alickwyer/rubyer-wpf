@@ -27,6 +27,7 @@
         <Setter Property="MinValue" Value="{x:Static system:Double.MinValue}" />
         <Setter Property="MaxValue" Value="{x:Static system:Double.MaxValue}" />
         <Setter Property="IsPasteTextEnabled" Value="True" />
+        <Setter Property="InputMethod.IsInputMethodEnabled" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
@@ -56,6 +57,7 @@
                              BorderThickness="{TemplateBinding BorderThickness}"
                              Foreground="{TemplateBinding Foreground}"
                              InputMethod.InputScope="Digits"
+                             InputMethod.IsInputMethodEnabled="{Binding Path=(InputMethod.IsInputMethodEnabled), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                              IsReadOnly="{TemplateBinding IsReadOnly}"
                              MaxLength="{TemplateBinding MaxLength}"
                              Text="{TemplateBinding Text}">

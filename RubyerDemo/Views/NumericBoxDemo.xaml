@@ -14,13 +14,15 @@
             <Grid Margin="10"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
-                <controls:ControlDisplay Title="Default NumericBox" Description="数值框会自动限制数值外的字符输入和粘贴等">
+                <controls:ControlDisplay Title="Default NumericBox" Description="数值框可限制数值外的字符输入、粘贴和输入法等">
                     <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                         <rubyer:NumericBox Width="120"
+                                           InputMethod.IsInputMethodEnabled="False"
                                            IsPasteTextEnabled="False"
                                            ValueChanged="NumericBox_ValueChanged"
                                            Value="1" />
                         <rubyer:NumericBox Width="120"
+                                           InputMethod.IsInputMethodEnabled="False"
                                            IsPasteTextEnabled="False"
                                            NumericType="Double"
                                            Value="0.1" />
