@@ -16,7 +16,7 @@
                         <StackPanel Margin="5" Orientation="Horizontal">
                             <rubyer:Badge x:Name="MyBadge"
                                           Margin="10"
-                                          IsHidden="True"
+                                          IsHidden="False"
                                           Text="1">
                                 <Button Style="{DynamicResource OutlineButton}" Click="Button_Click">
                                     经验+1
