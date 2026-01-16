@@ -31,16 +31,17 @@
                                 Background="{TemplateBinding DescriptionBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding DescriptionBorderThickness}">
-                            <ContentControl x:Name="descriptionContent"
-                                            Margin="{TemplateBinding Padding}"
-                                            HorizontalAlignment="{TemplateBinding HorizontalDescriptionAlignment}"
-                                            VerticalAlignment="{TemplateBinding VerticalDescriptionAlignment}"
-                                            Content="{TemplateBinding Description}"
-                                            Focusable="False"
-                                            FontSize="{TemplateBinding DescriptionFontSize}"
-                                            FontWeight="{TemplateBinding DescriptionFontWeight}"
-                                            Foreground="{TemplateBinding DescriptionForeground}"
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <ContentPresenter x:Name="descriptionContent"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalDescriptionAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalDescriptionAlignment}"
+                                              ContentSource="Description"
+                                              ContentTemplate="{Binding DescriptionTemplate, RelativeSource={RelativeSource AncestorType=rubyer:Description}}"
+                                              Focusable="False"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              TextBlock.FontSize="{TemplateBinding DescriptionFontSize}"
+                                              TextBlock.FontWeight="{TemplateBinding DescriptionFontWeight}"
+                                              TextBlock.Foreground="{TemplateBinding DescriptionForeground}" />
                         </Border>
                         <Border x:Name="contentBorder"
                                 Grid.Column="1"
@@ -56,6 +57,15 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Description, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="{x:Null}" />
+                                <Condition Binding="{Binding DisplayDescriptionPath, Converter={StaticResource IsNullOrEmptyConverter}, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="descriptionContent" Property="Content" Value="{Binding DataContext, ElementName=descriptionBorder}" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

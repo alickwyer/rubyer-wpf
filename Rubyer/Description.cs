@@ -184,6 +184,21 @@ namespace Rubyer
             set { SetValue(DescriptionStringFormatProperty, value); }
         }
 
+        /// <summary>
+        /// 描述显示模板
+        /// </summary>
+        public DataTemplate DescriptionTemplate
+        {
+            get { return (DataTemplate)GetValue(DescriptionTemplateProperty); }
+            set { SetValue(DescriptionTemplateProperty, value); }
+        }
+
+        /// <summary>
+        /// 描述显示模板
+        /// </summary>
+        public static readonly DependencyProperty DescriptionTemplateProperty =
+            DependencyProperty.Register("DescriptionTemplate", typeof(DataTemplate), typeof(Description), new PropertyMetadata(null));
+
         #endregion properties
 
         static Description()
@@ -338,65 +353,33 @@ namespace Rubyer
         {
             Description descriptionHost = (Description)d;
 
-            if (descriptionHost.IsLoaded)
-            {
-                descriptionHost.UpdateDisplayMemberTemplateSelector();
-            }
-            else
-            {
-                descriptionHost.Loaded += (a, b) =>
-                {
-                    descriptionHost.UpdateDisplayMemberTemplateSelector();
-                };
-            }
+            descriptionHost.UpdateDisplayMemberTemplateSelector();
         }
 
         private static void OnDescriptionStringFormatChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Description descriptionHost = (Description)d;
+
             descriptionHost.UpdateDisplayMemberTemplateSelector();
         }
 
         private void UpdateDisplayMemberTemplateSelector()
         {
-            for (int i = 0; i < Items.Count; i++)
+            if (!string.IsNullOrEmpty(DisplayDescriptionPath) || !string.IsNullOrEmpty(DescriptionStringFormat))
             {
-                DescriptionItem item;
-                if (ItemsSource == null)
-                {
-                    item = Items[i] as DescriptionItem;
-                }
-                else
-                {
-                    item = ItemContainerGenerator.ContainerFromIndex(i) as DescriptionItem;
-                }
-
-                if (item == null)
-                {
-                    return;
-                }
-
-                var descriptionContent = item.TryGetChildPartFromVisualTree<ContentControl>("descriptionContent");
-
-                if (descriptionContent != null)
-                {
-                    if (!string.IsNullOrEmpty(DisplayDescriptionPath) || !string.IsNullOrEmpty(DescriptionStringFormat))
-                    {
-                        var contentTemplate = new ControlTemplate();
-                        FrameworkElementFactory frameworkElementFactory2 = new FrameworkElementFactory(typeof(TextBlock));
-                        Binding binding2 = new Binding();
-                        binding2.Path = new PropertyPath(DisplayDescriptionPath);
-                        binding2.StringFormat = DescriptionStringFormat;
-                        frameworkElementFactory2.SetBinding(TextBlock.TextProperty, binding2);
-                        contentTemplate.VisualTree = frameworkElementFactory2;
-                        contentTemplate.Seal();
-                        descriptionContent.Template = contentTemplate;
-                    }
-                    else if (descriptionContent.Template is ControlTemplate)
-                    {
-                        descriptionContent.ClearValue(ContentControl.TemplateProperty);
-                    }
-                }
+                var dataTemplate = new DataTemplate();
+                FrameworkElementFactory frameworkElementFactory2 = new FrameworkElementFactory(typeof(TextBlock));
+                Binding binding2 = new Binding();
+                binding2.Path = new PropertyPath(DisplayDescriptionPath);
+                binding2.StringFormat = DescriptionStringFormat;
+                frameworkElementFactory2.SetBinding(TextBlock.TextProperty, binding2);
+                dataTemplate.VisualTree = frameworkElementFactory2;
+                dataTemplate.Seal();
+                DescriptionTemplate = dataTemplate;
+            }
+            else if (DescriptionTemplate is not null)
+            {
+                ClearValue(Description.DescriptionTemplateProperty);
             }
         }
     }
