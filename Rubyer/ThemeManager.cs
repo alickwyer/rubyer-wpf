@@ -249,11 +249,11 @@ namespace Rubyer
         /// <param name="cornerRadius">圆角半径</param>
         public static void SwitchContainerCornerRadius(double cornerRadius)
         {
-            Application.Current.Resources["AllContainerCornerRadius"] = new CornerRadius(cornerRadius);
-            Application.Current.Resources["LeftContainerCornerRadius"] = new CornerRadius(cornerRadius, 0, 0, cornerRadius);
-            Application.Current.Resources["RightContainerCornerRadius"] = new CornerRadius(0, cornerRadius, cornerRadius, 0);
-            Application.Current.Resources["TopContainerCornerRadius"] = new CornerRadius(cornerRadius, cornerRadius, 0, 0);
-            Application.Current.Resources["BottomContainerCornerRadius"] = new CornerRadius(0, 0, cornerRadius, cornerRadius);
+            ResourceManager.Resources["AllContainerCornerRadius"] = new CornerRadius(cornerRadius);
+            ResourceManager.Resources["LeftContainerCornerRadius"] = new CornerRadius(cornerRadius, 0, 0, cornerRadius);
+            ResourceManager.Resources["RightContainerCornerRadius"] = new CornerRadius(0, cornerRadius, cornerRadius, 0);
+            ResourceManager.Resources["TopContainerCornerRadius"] = new CornerRadius(cornerRadius, cornerRadius, 0, 0);
+            ResourceManager.Resources["BottomContainerCornerRadius"] = new CornerRadius(0, 0, cornerRadius, cornerRadius);
         }
 
         /// <summary>
@@ -262,11 +262,11 @@ namespace Rubyer
         /// <param name="cornerRadius">圆角半径</param>
         public static void SwitchControlCornerRadius(double cornerRadius)
         {
-            Application.Current.Resources["AllControlCornerRadius"] = new CornerRadius(cornerRadius);
-            Application.Current.Resources["LeftControlCornerRadius"] = new CornerRadius(cornerRadius, 0, 0, cornerRadius);
-            Application.Current.Resources["RightControlCornerRadius"] = new CornerRadius(0, cornerRadius, cornerRadius, 0);
-            Application.Current.Resources["TopControlCornerRadius"] = new CornerRadius(cornerRadius, cornerRadius, 0, 0);
-            Application.Current.Resources["BottomControlCornerRadius"] = new CornerRadius(0, 0, cornerRadius, cornerRadius);
+            ResourceManager.Resources["AllControlCornerRadius"] = new CornerRadius(cornerRadius);
+            ResourceManager.Resources["LeftControlCornerRadius"] = new CornerRadius(cornerRadius, 0, 0, cornerRadius);
+            ResourceManager.Resources["RightControlCornerRadius"] = new CornerRadius(0, cornerRadius, cornerRadius, 0);
+            ResourceManager.Resources["TopControlCornerRadius"] = new CornerRadius(cornerRadius, cornerRadius, 0, 0);
+            ResourceManager.Resources["BottomControlCornerRadius"] = new CornerRadius(0, 0, cornerRadius, cornerRadius);
         }
 
         /// <summary>
@@ -275,13 +275,15 @@ namespace Rubyer
         /// <param name="cultureName">语言</param>
         public static void SwitchCulture(string cultureName)
         {
-            //Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName);
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
+            if (Application.Current is null)
+            {
+                return;
+            }
 
             string url = $"pack://application:,,,/Rubyer;component/Themes/Resources/I18N/{cultureName}.xaml";
             var resourceDictionaries = Application.Current.Resources.MergedDictionaries;
             var resourceDictionary = new ResourceDictionary { Source = new Uri(url, UriKind.RelativeOrAbsolute) };
-            if (resourceDictionaries.Any(x =>x.Source?.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
+            if (resourceDictionaries.Any(x => x.Source?.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
             {
                 var oldColorResource = resourceDictionaries.FirstOrDefault(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri);
                 resourceDictionaries.Remove(oldColorResource);
@@ -296,7 +298,7 @@ namespace Rubyer
         /// <param name="fontSize">文字大小</param>
         public static void SwitchDefaultFontSize(double fontSize)
         {
-            Application.Current.Resources["DefaultFontSize"] = fontSize;
+            ResourceManager.Resources["DefaultFontSize"] = fontSize;
         }
 
         private static bool CheckIsDark(Brush brush)
@@ -315,6 +317,11 @@ namespace Rubyer
         /// <param name="colorUrl">颜色配置文件路径</param>
         public static void ApplyThemeColor(string colorUrl)
         {
+            if (Application.Current is null)
+            {
+                return;
+            }
+
             var resourceDictionaries = Application.Current.Resources.MergedDictionaries;
 
             var resourceDictionary = new ResourceDictionary
@@ -330,7 +337,7 @@ namespace Rubyer
 
             resourceDictionaries.Add(resourceDictionary);
 
-            var currentBackground = (Brush)Application.Current.Resources["DefaultBackground"];
+            var currentBackground = ResourceManager.TryGetResource<Brush>("DefaultBackground");
             var currentThemeColor = GetCurrentThemeColor(Application.Current);
             var isDarkMode = CheckIsDark(currentBackground);
             ApplyTheme(isDarkMode);

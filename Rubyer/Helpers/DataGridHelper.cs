@@ -12,6 +12,7 @@ using Rubyer.Commons.KnownBoxes;
 using Rubyer.DataAnnotations;
 using Rubyer.Enums;
 using System.Collections.Generic;
+using Rubyer.Commons;
 
 namespace Rubyer
 {
@@ -519,27 +520,26 @@ namespace Rubyer
                     {
                         if (DataGridTextColumn.DefaultEditingElementStyle == textColumn.EditingElementStyle)
                         {
-                            textColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridTextColumn"] as Style;
+                            textColumn.EditingElementStyle = ResourceManager.TryGetResource<Style>("RubyerDataGridTextColumn");
                         }
                     }
                     else if (column is DataGridComboBoxColumn comboBoxColumn)
                     {
-                        //comboBoxColumn.ElementStyle ??= Application.Current.Resources["RubyerDataGridComboBoxColumn"] as Style;
                         if (DataGridComboBoxColumn.DefaultEditingElementStyle == comboBoxColumn.EditingElementStyle)
                         {
-                            comboBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumnEditting"] as Style;
+                            comboBoxColumn.EditingElementStyle = ResourceManager.TryGetResource<Style>("RubyerDataGridComboBoxColumnEditting");
                         }
                     }
                     else if (column is DataGridCheckBoxColumn checkBoxColumn)
                     {
                         if (DataGridCheckBoxColumn.DefaultElementStyle == checkBoxColumn.ElementStyle)
                         {
-                            checkBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumn"] as Style;
+                            checkBoxColumn.ElementStyle = ResourceManager.TryGetResource<Style>("RubyerDataGridCheckBoxColumn");
                         }
 
                         if (DataGridCheckBoxColumn.DefaultEditingElementStyle == checkBoxColumn.EditingElementStyle)
                         {
-                            checkBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumnEditting"] as Style;
+                            checkBoxColumn.EditingElementStyle = ResourceManager.TryGetResource<Style>("RubyerDataGridCheckBoxColumnEditting");
                         }
                     }
                 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using Rubyer;
 
 namespace RubyerDemo.ViewModels
 {
@@ -16,16 +17,16 @@ namespace RubyerDemo.ViewModels
     {
         public List<Brush> AllBrushes => new List<Brush>
         {
-            Application.Current.Resources["DefaultForeground"] as Brush,
-            Application.Current.Resources["DefaultBackground"] as Brush,
-            Application.Current.Resources["Primary"] as Brush,
-            Application.Current.Resources["Light"] as Brush,
-            Application.Current.Resources["Dark"] as Brush,
-            Application.Current.Resources["Accent"] as Brush,
-            Application.Current.Resources["Success"] as Brush,
-            Application.Current.Resources["Warning"] as Brush,
-            Application.Current.Resources["Info"] as Brush,
-            Application.Current.Resources["Error"] as Brush,
+            ResourceManager.TryGetResource<Brush>("DefaultForeground"),
+            ResourceManager.TryGetResource<Brush>("DefaultBackground"),
+            ResourceManager.TryGetResource<Brush>("Primary"),
+            ResourceManager.TryGetResource<Brush>("Light"),
+            ResourceManager.TryGetResource<Brush>("Dark"),
+            ResourceManager.TryGetResource<Brush>("Accent"),
+            ResourceManager.TryGetResource<Brush>("Success"),
+            ResourceManager.TryGetResource<Brush>("Warning"),
+            ResourceManager.TryGetResource<Brush>("Info"),
+            ResourceManager.TryGetResource<Brush>("Error"),
         };
 
         public List<FontWeight> AllFontWeights => new List<FontWeight>
@@ -64,7 +65,7 @@ namespace RubyerDemo.ViewModels
         [ObservableProperty]
         private Brush contentForeground;
 
-        [ObservableProperty] 
+        [ObservableProperty]
         private Brush contentBackground;
 
         [ObservableProperty]

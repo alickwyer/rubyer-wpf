@@ -395,7 +395,7 @@ namespace Rubyer
             PageItemInfos.Add(new PageItemInfo
             {
                 Text = "<",
-                ToolTip = Application.Current.Resources["I18N_PageBar_PreviousPage"].ToString(),
+                ToolTip = ResourceManager.TryGetResource("I18N_PageBar_PreviousPage").ToString(),
                 Value = PageIndex - 1,
                 IsEnabled = PageIndex != 1 && pageCount != 1,
             });
@@ -440,13 +440,13 @@ namespace Rubyer
                     {
                         model.Value = PageIndex - 5;
                         model.Text = "...";
-                        model.ToolTip = Application.Current.Resources["I18N_PageBar_Forward5Pages"].ToString();
+                        model.ToolTip = ResourceManager.TryGetResource("I18N_PageBar_Forward5Pages").ToString();
                     }
                     else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
                     {
                         model.Value = PageIndex + 5;
                         model.Text = "...";
-                        model.ToolTip = Application.Current.Resources["I18N_PageBar_Backwards5Pages"].ToString();
+                        model.ToolTip = ResourceManager.TryGetResource("I18N_PageBar_Backwards5Pages").ToString();
                     }
                 }
 
@@ -468,7 +468,7 @@ namespace Rubyer
             PageItemInfos.Add(new PageItemInfo
             {
                 Text = ">",
-                ToolTip = Application.Current.Resources["I18N_PageBar_NextPage"].ToString(),
+                ToolTip = ResourceManager.TryGetResource("I18N_PageBar_NextPage").ToString(),
                 Value = PageIndex + 1,
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
             });

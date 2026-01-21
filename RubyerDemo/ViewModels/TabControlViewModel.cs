@@ -15,17 +15,17 @@ namespace RubyerDemo.ViewModels
     {
         public List<Brush> AllBrushes => new List<Brush>
         {
-            Application.Current.Resources["DefaultForeground"] as Brush,
-            Application.Current.Resources["DefaultBackground"] as Brush,
-            Application.Current.Resources["Primary"] as Brush,
-            Application.Current.Resources["Light"] as Brush,
-            Application.Current.Resources["Dark"] as Brush,
-            Application.Current.Resources["Accent"] as Brush,
-            Application.Current.Resources["Success"] as Brush,
-            Application.Current.Resources["Warning"] as Brush,
-            Application.Current.Resources["Info"] as Brush,
-            Application.Current.Resources["Error"] as Brush,
-            Application.Current.Resources["HeaderBackground"] as Brush,
+            ResourceManager.TryGetResource<Brush>("DefaultForeground"),
+            ResourceManager.TryGetResource<Brush>("DefaultBackground"),
+            ResourceManager.TryGetResource<Brush>("Primary"),
+            ResourceManager.TryGetResource<Brush>("Light"),
+            ResourceManager.TryGetResource<Brush>("Dark"),
+            ResourceManager.TryGetResource<Brush>("Accent"),
+            ResourceManager.TryGetResource<Brush>("Success"),
+            ResourceManager.TryGetResource<Brush>("Warning"),
+            ResourceManager.TryGetResource<Brush>("Info"),
+            ResourceManager.TryGetResource<Brush>("Error"),
+            ResourceManager.TryGetResource<Brush>("HeaderBackground"),
             Brushes.Transparent,
         };
 
@@ -52,9 +52,9 @@ namespace RubyerDemo.ViewModels
 
         public List<StyleResource> Styles => new List<StyleResource>
         {
-            new StyleResource("RubyerTabControl", Application.Current.Resources["RubyerTabControl"] as Style),
-            new StyleResource("LineTabControl", Application.Current.Resources["LineTabControl"] as Style),
-            new StyleResource("CardTabControl", Application.Current.Resources["CardTabControl"] as Style),
+            new StyleResource("RubyerTabControl", ResourceManager.TryGetResource<Style>("RubyerTabControl")),
+            new StyleResource("LineTabControl", ResourceManager.TryGetResource<Style>("LineTabControl")),
+            new StyleResource("CardTabControl", ResourceManager.TryGetResource<Style>("CardTabControl")),
         };
 
         [ObservableProperty]
