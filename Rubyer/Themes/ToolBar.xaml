@@ -25,6 +25,7 @@
            TargetType="{x:Type Button}">
         <Setter Property="Margin" Value="0 0 2 0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ToolBar}}" />
     </Style>
 
     <Style x:Key="ToolBarToggleButtonStyle"
@@ -33,8 +34,9 @@
         <Setter Property="Margin" Value="0 0 2 0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
-        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ToolBar}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ToolBar}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ToolBar}}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
     </Style>
 
@@ -42,13 +44,13 @@
            BasedOn="{StaticResource ToolBarButtonBaseStyle}"
            TargetType="{x:Type Button}" />
 
-    <Style x:Key="{x:Static ToolBar.ToggleButtonStyleKey}"
-           BasedOn="{StaticResource ToolBarToggleButtonStyle}"
-           TargetType="{x:Type ToggleButton}" />
-
     <Style x:Key="{x:Static ToolBar.ComboBoxStyleKey}"
            BasedOn="{StaticResource RubyerComboBox}"
            TargetType="{x:Type ComboBox}" />
+
+    <Style x:Key="{x:Static ToolBar.ToggleButtonStyleKey}"
+           BasedOn="{StaticResource ToolBarToggleButtonStyle}"
+           TargetType="{x:Type ToggleButton}" />
 
     <Style x:Key="{x:Static ToolBar.CheckBoxStyleKey}"
            BasedOn="{StaticResource ToolBarToggleButtonStyle}"
@@ -72,7 +74,6 @@
         <Setter Property="Margin" Value="2" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FontSize" Value="16" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -103,8 +104,8 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
-        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ToolBar}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ToolBar}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -145,6 +146,8 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ToolBarTray}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ToolBarTray}}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ToolBarTray}}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -155,7 +158,8 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                         <DockPanel>
-                            <ToggleButton Style="{StaticResource ToolBarOverflowButtonStyle}"
+                            <ToggleButton x:Name="ToolBarOverflowButton"
+                                          Style="{StaticResource ToolBarOverflowButtonStyle}"
                                           ClickMode="Press"
                                           DockPanel.Dock="Right"
                                           IsChecked="{Binding IsOverflowOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
@@ -189,7 +193,9 @@
 
                             <Thumb x:Name="ToolBarThumb"
                                    Style="{StaticResource ToolBarThumbStyle}"
-                                   Width="10" />
+                                   Width="10"
+                                   Height="Auto"
+                                   DockPanel.Dock="Left" />
 
                             <ToolBarPanel x:Name="PART_ToolBarPanel" IsItemsHost="True" />
                         </DockPanel>
@@ -202,6 +208,13 @@
                         <Trigger Property="ToolBarTray.IsLocked" Value="True">
                             <Setter TargetName="ToolBarThumb" Property="Visibility" Value="Collapsed" />
                         </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="ToolBarThumb" Property="DockPanel.Dock" Value="Top" />
+                            <Setter TargetName="ToolBarThumb" Property="Width" Value="Auto" />
+                            <Setter TargetName="ToolBarThumb" Property="Height" Value="10" />
+                            <Setter TargetName="ToolBarOverflowButton" Property="DockPanel.Dock" Value="Bottom" />
+                            <Setter TargetName="OverflowPopup"  Property="Placement" Value="Right" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -210,6 +223,8 @@
 
     <Style x:Key="RubyerToolBarTray" TargetType="{x:Type ToolBarTray}">
         <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
     </Style>
 </ResourceDictionary>

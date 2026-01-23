@@ -90,7 +90,7 @@
                             <rubyer:Icon Type="Save2Fill" />
                         </Button>
                     </ToolBar>
-                    <ToolBar Foreground="{DynamicResource Dark}">
+                    <ToolBar rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}" Foreground="{DynamicResource Dark}">
                         <RadioButton Checked="RadioButton_Checked"
                                      GroupName="Align"
                                      Tag="left">
