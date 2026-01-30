@@ -329,7 +329,7 @@ namespace Rubyer
                 Source = new Uri(colorUrl, UriKind.RelativeOrAbsolute)
             };
 
-            if (resourceDictionaries.Any(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
+            if (resourceDictionaries.Any(x => x.Source?.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
             {
                 var oldColorResource = resourceDictionaries.First(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri);
                 resourceDictionaries.Remove(oldColorResource);
