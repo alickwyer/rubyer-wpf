@@ -283,9 +283,8 @@ namespace Rubyer
             string url = $"pack://application:,,,/Rubyer;component/Themes/Resources/I18N/{cultureName}.xaml";
             var resourceDictionaries = Application.Current.Resources.MergedDictionaries;
             var resourceDictionary = new ResourceDictionary { Source = new Uri(url, UriKind.RelativeOrAbsolute) };
-            if (resourceDictionaries.Any(x => x.Source?.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
+            if (resourceDictionaries.FirstOrDefault(x => x.Source?.AbsoluteUri == resourceDictionary.Source.AbsoluteUri) is ResourceDictionary oldColorResource)
             {
-                var oldColorResource = resourceDictionaries.FirstOrDefault(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri);
                 resourceDictionaries.Remove(oldColorResource);
             }
 
@@ -329,9 +328,8 @@ namespace Rubyer
                 Source = new Uri(colorUrl, UriKind.RelativeOrAbsolute)
             };
 
-            if (resourceDictionaries.Any(x => x.Source?.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
+            if (resourceDictionaries.FirstOrDefault(x => x.Source?.AbsoluteUri == resourceDictionary.Source.AbsoluteUri) is ResourceDictionary oldColorResource)
             {
-                var oldColorResource = resourceDictionaries.First(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri);
                 resourceDictionaries.Remove(oldColorResource);
             }
 
