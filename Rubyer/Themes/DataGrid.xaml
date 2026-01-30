@@ -368,6 +368,15 @@
                  x:Shared="False"
                  Type="GridFill" />
 
+    <StackPanel x:Key="DataGridEmptyView"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                x:Shared="False"
+                Orientation="Horizontal">
+        <rubyer:Icon Margin="5 0" Type="DatabaseFill" />
+        <TextBlock Text="{DynamicResource I18N_DataGrid_NoData}" />
+    </StackPanel>
+
     <!--  Style and template for the DataGrid.  -->
     <Style x:Key="RubyerDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="Transparent" />
@@ -406,16 +415,7 @@
         <Setter Property="rubyer:DataGridHelper.ClickToEdit" Value="True" />
         <Setter Property="rubyer:DataGridHelper.ApplyDataAnnotations" Value="True" />
         <Setter Property="rubyer:DataGridHelper.LoadingContent" Value="{DynamicResource I18N_DataGrid_LoadingContent}" />
-        <Setter Property="rubyer:DataGridHelper.EmptyView">
-            <Setter.Value>
-                <StackPanel HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal">
-                    <rubyer:Icon Margin="5 0" Type="DatabaseFill" />
-                    <TextBlock Text="{DynamicResource I18N_DataGrid_NoData}" />
-                </StackPanel>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="rubyer:DataGridHelper.EmptyView" Value="{StaticResource DataGridEmptyView}" />
         <Setter Property="rubyer:DataGridHelper.RowHeaderTitle" Value="{StaticResource DataGridRowHeaderTitleIcon}" />
         <Setter Property="Template">
             <Setter.Value>
