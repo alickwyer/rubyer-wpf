@@ -653,7 +653,7 @@ ThemeManager.ThemeModeChanged += (sender, args) =>
             <!-- 通知容器 -->
             <rubyer:NotificationContainer>
                 <Grid>
-                    <StackPanel Margin="20" Spacing="10"
+                    <StackPanel Margin="20"
                                 rubyer:PanelHelper.Spacing="10">
 
                         <!-- 主题切换按钮 -->
